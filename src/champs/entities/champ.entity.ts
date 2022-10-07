@@ -6,7 +6,7 @@ export type ChampDocument = Champ & Document;
 
 @Schema({ timestamps: true })
 export class Champ {
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, unique: true })
   nom: string;
 
   @Prop({ type: Types.ObjectId, required: true })
