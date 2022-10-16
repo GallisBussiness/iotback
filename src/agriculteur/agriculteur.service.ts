@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateAgriculteurDto } from './dto/create-agriculteur.dto';
 import { UpdateAgriculteurDto } from './dto/update-agriculteur.dto';
+import { Agriculteur, AgriculteurDocument } from './entities/agriculteur.entity';
 
 @Injectable()
 export class AgriculteurService {
-  create(createAgriculteurDto: CreateAgriculteurDto) {
-    return 'This action adds a new agriculteur';
+  constructor(
+    @InjectModel(Agriculteur.name) private AgriculteurModel: Model<AgriculteurDocument>,
+  ) {}
+
+  async create(createAgriculteurDto: CreateAgriculteurDto): Promise<Agriculteur> {
+    try {
+      const createdAgriculteur = new this.AgriculteurModel(createAgriculteurDto);
+      return await createdAgriculteur.save();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findAll() {
-    return `This action returns all agriculteur`;
+  async findAll(): Promise<Agriculteur[]> {
+    try {
+      return await this.AgriculteurModel.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} agriculteur`;
+  async findOne(id: string): Promise<Agriculteur> {
+    try {
+      return await this.AgriculteurModel.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  update(id: number, updateAgriculteurDto: UpdateAgriculteurDto) {
-    return `This action updates a #${id} agriculteur`;
+  async update(
+    id: string,
+    updateAgriculteurDto: UpdateAgriculteurDto,
+  ): Promise<Agriculteur> {
+    try {
+      return await this.AgriculteurModel.findByIdAndUpdate(id, updateAgriculteurDto);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} agriculteur`;
+  async remove(id: string): Promise<Agriculteur> {
+    try {
+      return await this.AgriculteurModel.findByIdAndDelete(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }
