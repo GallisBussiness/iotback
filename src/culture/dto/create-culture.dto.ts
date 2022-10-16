@@ -5,7 +5,10 @@ export class CreateCultureDto {
   nom: string;
 
   @IsNumber()
-  phsol: number;
+  phsolmin: number;
+
+  @IsNumber()
+  phsolmax: number;
 
   @IsNumber()
   humiditesolmin: number;

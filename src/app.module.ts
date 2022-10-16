@@ -14,6 +14,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { TypeModule } from './type/type.module';
+import { AgriculteurModule } from './agriculteur/agriculteur.module';
+import { NoeudModule } from './noeud/noeud.module';
+import { Dht11Module } from './dht11/dht11.module';
+import { HfModule } from './hf/hf.module';
+import { HsModule } from './hs/hs.module';
+import { PhModule } from './ph/ph.module';
 
 @Module({
   imports: [
@@ -42,6 +48,12 @@ import { TypeModule } from './type/type.module';
     ChampsModule,
     CultureModule,
     TypeModule,
+    AgriculteurModule,
+    NoeudModule,
+    Dht11Module,
+    HfModule,
+    HsModule,
+    PhModule,
   ],
   controllers: [],
   providers: [],

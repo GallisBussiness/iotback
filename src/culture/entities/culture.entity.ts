@@ -9,7 +9,10 @@ export class Culture {
   nom: string;
 
   @Prop({ type: Number, required: true })
-  phsol: number;
+  phsolmin: number;
+
+  @Prop({ type: Number, required: true })
+  phsolmax: number;
 
   @Prop({ type: Number, required: true })
   humiditesolmin: number;
