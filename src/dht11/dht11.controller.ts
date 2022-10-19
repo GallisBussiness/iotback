@@ -19,16 +19,16 @@ export class Dht11Controller {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.dht11Service.findOne(+id);
+    return this.dht11Service.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDht11Dto: UpdateDht11Dto) {
-    return this.dht11Service.update(+id, updateDht11Dto);
+    return this.dht11Service.update(id, updateDht11Dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.dht11Service.remove(+id);
+    return this.dht11Service.remove(id);
   }
 }

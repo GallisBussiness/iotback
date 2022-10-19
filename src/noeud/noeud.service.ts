@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateNoeudDto } from './dto/create-noeud.dto';
 import { UpdateNoeudDto } from './dto/update-noeud.dto';
+import { Noeud, NoeudDocument } from './entities/noeud.entity';
 
 @Injectable()
 export class NoeudService {
-  create(createNoeudDto: CreateNoeudDto) {
-    return 'This action adds a new noeud';
+  constructor(
+    @InjectModel(Noeud.name) private NoeudModel: Model<NoeudDocument>,
+  ) {}
+  async create(createNoeudDto: CreateNoeudDto): Promise<Noeud> {
+    try {
+      const createdNoeud = new this.NoeudModel(createNoeudDto);
+      return await createdNoeud.save();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findAll() {
-    return `This action returns all noeud`;
+  async findAll(): Promise<Noeud[]> {
+    try {
+      return await this.NoeudModel.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} noeud`;
+  async findOne(id: string): Promise<Noeud> {
+    try {
+      return await this.NoeudModel.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  update(id: number, updateNoeudDto: UpdateNoeudDto) {
-    return `This action updates a #${id} noeud`;
+  async update(
+    id: string,
+    updateNoeudDto: UpdateNoeudDto,
+  ): Promise<Noeud> {
+    try {
+      return await this.NoeudModel.findByIdAndUpdate(id, updateNoeudDto);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} noeud`;
+  async remove(id: string): Promise<Noeud> {
+    try {
+      return await this.NoeudModel.findByIdAndDelete(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }

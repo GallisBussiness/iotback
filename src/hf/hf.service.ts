@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateHfDto } from './dto/create-hf.dto';
 import { UpdateHfDto } from './dto/update-hf.dto';
+import { Hf, HfDocument } from './entities/hf.entity';
 
 @Injectable()
 export class HfService {
-  create(createHfDto: CreateHfDto) {
-    return 'This action adds a new hf';
+  constructor(
+    @InjectModel(Hf.name) private HfModel: Model<HfDocument>,
+  ) {}
+  async create(createHfDto: CreateHfDto): Promise<Hf> {
+    try {
+      const createdHf = new this.HfModel(createHfDto);
+      return await createdHf.save();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findAll() {
-    return `This action returns all hf`;
+  async findAll(): Promise<Hf[]> {
+    try {
+      return await this.HfModel.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} hf`;
+  async findOne(id: string): Promise<Hf> {
+    try {
+      return await this.HfModel.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  update(id: number, updateHfDto: UpdateHfDto) {
-    return `This action updates a #${id} hf`;
+  async update(
+    id: string,
+    updateHfDto: UpdateHfDto,
+  ): Promise<Hf> {
+    try {
+      return await this.HfModel.findByIdAndUpdate(id, updateHfDto);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} hf`;
+  async remove(id: string): Promise<Hf> {
+    try {
+      return await this.HfModel.findByIdAndDelete(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }

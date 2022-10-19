@@ -1,4 +1,4 @@
-import { IsMongoId, IsString } from "class-validator";
+import { IsMongoId, IsNumber, IsString } from "class-validator";
 
 export class CreateChampDto {
   
@@ -8,9 +8,6 @@ export class CreateChampDto {
     @IsMongoId()
     user: string;
   
-    @IsString()
-    superficie: string;
-  
-    @IsMongoId()
-    culture: string;
+    @IsNumber()
+    superficie: number;
 }

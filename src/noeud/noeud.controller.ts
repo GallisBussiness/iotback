@@ -19,16 +19,16 @@ export class NoeudController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.noeudService.findOne(+id);
+    return this.noeudService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateNoeudDto: UpdateNoeudDto) {
-    return this.noeudService.update(+id, updateNoeudDto);
+    return this.noeudService.update(id, updateNoeudDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.noeudService.remove(+id);
+    return this.noeudService.remove(id);
   }
 }

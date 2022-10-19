@@ -19,16 +19,16 @@ export class HfController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.hfService.findOne(+id);
+    return this.hfService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateHfDto: UpdateHfDto) {
-    return this.hfService.update(+id, updateHfDto);
+    return this.hfService.update(id, updateHfDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.hfService.remove(+id);
+    return this.hfService.remove(id);
   }
 }

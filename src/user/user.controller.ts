@@ -38,6 +38,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get('noadmin')
+  findAllNoAdmin() {
+    return this.userService.findAllNoAdmin();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);

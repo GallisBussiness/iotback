@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from "class-validator";
 
-export class CreateHfDto {
+export class CreateHsolDto {
     @IsNumber()
     valeur: number;
 

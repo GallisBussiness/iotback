@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Types } from "mongoose";
 import { Capteur } from "src/capteur/entities/capteur.entity";
+import { Document } from "mongoose";
 
-export type HfDocument = Hf & Document;
+export type HsolDocument = Hsol & Document;
 
-@Schema({ timestamps: true })
-export class Hf {
+@Schema({timestamps: true})
+export class Hsol {
     @Prop({type: Number, required: true})
     valeur: number;
 
@@ -13,4 +14,4 @@ export class Hf {
     capteur: string;
 }
 
-export const HfSchema = SchemaFactory.createForClass(Hf);
+export const HsolSchema = SchemaFactory.createForClass(Hsol);

@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateDht11Dto } from './dto/create-dht11.dto';
 import { UpdateDht11Dto } from './dto/update-dht11.dto';
+import { Dht11, Dht11Document } from './entities/dht11.entity';
 
 @Injectable()
 export class Dht11Service {
-  create(createDht11Dto: CreateDht11Dto) {
-    return 'This action adds a new dht11';
+  constructor(
+    @InjectModel(Dht11.name) private Dht11Model: Model<Dht11Document>,
+  ) {}
+  async create(createDht11Dto: CreateDht11Dto): Promise<Dht11> {
+    try {
+      const createdDht11 = new this.Dht11Model(createDht11Dto);
+      return await createdDht11.save();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findAll() {
-    return `This action returns all dht11`;
+  async findAll(): Promise<Dht11[]> {
+    try {
+      return await this.Dht11Model.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} dht11`;
+  async findOne(id: string): Promise<Dht11> {
+    try {
+      return await this.Dht11Model.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  update(id: number, updateDht11Dto: UpdateDht11Dto) {
-    return `This action updates a #${id} dht11`;
+  async update(
+    id: string,
+    updateDht11Dto: UpdateDht11Dto,
+  ): Promise<Dht11> {
+    try {
+      return await this.Dht11Model.findByIdAndUpdate(id, updateDht11Dto);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} dht11`;
+  async remove(id: string): Promise<Dht11> {
+    try {
+      return await this.Dht11Model.findByIdAndDelete(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }

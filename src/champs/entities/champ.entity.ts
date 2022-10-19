@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Culture } from 'src/culture/entities/culture.entity';
 
 export type ChampDocument = Champ & Document;
 
@@ -12,11 +11,8 @@ export class Champ {
   @Prop({ type: Types.ObjectId, required: true })
   user: string;
 
-  @Prop({ type: String })
-  superficie: string;
-
-  @Prop({ type: Types.ObjectId, ref: Culture.name })
-  culture: string;
+  @Prop({ type: Number })
+  superficie: number;
 }
 
 export const ChampSchema = SchemaFactory.createForClass(Champ);

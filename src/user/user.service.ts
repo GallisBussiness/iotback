@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User, UserDocument } from './entities/user.entity';
+import { User, UserDocument, USER_ROLE } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -21,6 +21,14 @@ export class UserService {
   async findAll(): Promise<User[]> {
     try {
       return await this.userModel.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async findAllNoAdmin(): Promise<User[]> {
+    try {
+      return await this.userModel.find({role: USER_ROLE.USER});
     } catch (error) {
       throw new HttpException(error.message, 500);
     }
