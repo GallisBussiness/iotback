@@ -7,7 +7,11 @@ import { CaslModule } from 'src/casl/casl.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Capteur.name, schema: CapteurSchema }]),
+    MongooseModule.forFeatureAsync([{ name: Capteur.name, useFactory: () => {
+      const schema = CapteurSchema;
+      schema.plugin(require('mongoose-autopopulate'));
+      return schema;
+    } }]),
     CaslModule,
   ],
   controllers: [CapteurController],

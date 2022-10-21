@@ -5,7 +5,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Dht11, Dht11Schema } from './entities/dht11.entity';
 
 @Module({
-  imports: [MongooseModule.forFeature([{name: Dht11.name, schema: Dht11Schema}])],
+  imports: [MongooseModule.forFeatureAsync([{name: Dht11.name, useFactory: () => {
+    const schema = Dht11Schema;
+    schema.plugin(require('mongoose-autopopulate'));
+    return schema;
+  }}])],
   controllers: [Dht11Controller],
   providers: [Dht11Service]
 })

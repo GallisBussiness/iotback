@@ -7,12 +7,12 @@ export type NoeudDocument = Noeud & Document;
 @Schema({timestamps: true})
 export class Noeud {
     @Prop({type: String, required: true, unique: true})
-    name: string;
+    nom: string;
 
-    @Prop({type: Types.ObjectId, ref: Champ.name, required: true})
+    @Prop({type: Types.ObjectId, ref: Champ.name, required: true, autopopulate: true})
     champ: string;
 
-    @Prop({ type: Types.ObjectId, ref: Culture.name, required: true })
+    @Prop({ type: Types.ObjectId, ref: Culture.name, required: true, autopopulate: true })
     culture: string;
 }
 

@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreatePhDto } from './dto/create-ph.dto';
 import { UpdatePhDto } from './dto/update-ph.dto';
+import { Ph, PhDocument } from './entities/ph.entity';
 
 @Injectable()
 export class PhService {
-  create(createPhDto: CreatePhDto) {
-    return 'This action adds a new ph';
+  constructor(
+    @InjectModel(Ph.name) private PhModel: Model<PhDocument>,
+  ) {}
+  async create(createPhDto: CreatePhDto): Promise<Ph> {
+    try {
+      const createdPh = new this.PhModel(createPhDto);
+      return await createdPh.save();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findAll() {
-    return `This action returns all ph`;
+  async findAll(): Promise<Ph[]> {
+    try {
+      return await this.PhModel.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ph`;
+  async findOne(id: string): Promise<Ph> {
+    try {
+      return await this.PhModel.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  update(id: number, updatePhDto: UpdatePhDto) {
-    return `This action updates a #${id} ph`;
+  async update(
+    id: string,
+    updatePhDto: UpdatePhDto,
+  ): Promise<Ph> {
+    try {
+      return await this.PhModel.findByIdAndUpdate(id, updatePhDto);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} ph`;
+  async remove(id: string): Promise<Ph> {
+    try {
+      return await this.PhModel.findByIdAndDelete(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 }

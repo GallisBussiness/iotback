@@ -12,7 +12,7 @@ export class Dht11 {
     @Prop({type: Number, required: true})
     humidite: number;
 
-    @Prop({type: Types.ObjectId, required: true, ref: Capteur.name})
+    @Prop({type: Types.ObjectId, required: true, ref: Capteur.name, autopopulate: true})
     capteur: string;
 }
 

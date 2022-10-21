@@ -2,7 +2,7 @@ import { IsMongoId, IsString } from "class-validator";
 
 export class CreateNoeudDto {
     @IsString()
-    name: string;
+    nom: string;
 
     @IsMongoId()
     champ: string;

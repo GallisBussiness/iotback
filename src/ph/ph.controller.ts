@@ -19,16 +19,16 @@ export class PhController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.phService.findOne(+id);
+    return this.phService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePhDto: UpdatePhDto) {
-    return this.phService.update(+id, updatePhDto);
+    return this.phService.update(id, updatePhDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.phService.remove(+id);
+    return this.phService.remove(id);
   }
 }

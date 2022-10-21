@@ -6,7 +6,11 @@ import { Champ, ChampSchema } from './entities/champ.entity';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Champ.name, schema: ChampSchema }]),
+    MongooseModule.forFeatureAsync([{ name: Champ.name, useFactory: () => {
+      const schema = ChampSchema;
+      schema.plugin(require('mongoose-autopopulate'));
+      return schema;
+    } }]),
   ],
   controllers: [ChampsController],
   providers: [ChampsService],

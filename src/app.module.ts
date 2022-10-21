@@ -19,6 +19,7 @@ import { Dht11Module } from './dht11/dht11.module';
 import { HfModule } from './hf/hf.module';
 import { PhModule } from './ph/ph.module';
 import { HsolModule } from './hsol/hsol.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { HsolModule } from './hsol/hsol.module';
     HfModule,
     PhModule,
     HsolModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [],
   providers: [],

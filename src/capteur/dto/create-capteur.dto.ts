@@ -4,12 +4,9 @@ export class CreateCapteurDto {
   @IsString()
   nom: string;
 
-  @IsNumber()
-  valeur: number;
-
   @IsMongoId()
   type: string;
 
   @IsMongoId()
-  champ: string;
+  noeud: string;
 }

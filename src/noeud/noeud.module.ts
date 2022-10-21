@@ -5,7 +5,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Noeud, NoeudSchema } from './entities/noeud.entity';
 
 @Module({
-  imports: [MongooseModule.forFeature([{name: Noeud.name, schema: NoeudSchema}])],
+  imports: [MongooseModule.forFeatureAsync([{name: Noeud.name, useFactory: () => {
+    const schema = NoeudSchema;
+    schema.plugin(require('mongoose-autopopulate'));
+    return schema;
+  }}])],
   controllers: [NoeudController],
   providers: [NoeudService]
 })

@@ -9,7 +9,7 @@ export class Hf {
     @Prop({type: Number, required: true})
     valeur: number;
 
-    @Prop({type: Types.ObjectId, required: true, ref: Capteur.name})
+    @Prop({type: Types.ObjectId, required: true, ref: Capteur.name,autopopulate: true})
     capteur: string;
 }
 
