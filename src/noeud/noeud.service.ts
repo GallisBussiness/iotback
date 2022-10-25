@@ -15,6 +15,7 @@ export class NoeudService {
       const createdNoeud = new this.NoeudModel(createNoeudDto);
       return await createdNoeud.save();
     } catch (error) {
+      console.log(error)
       throw new HttpException(error.message, 500);
     }
   }
@@ -30,6 +31,14 @@ export class NoeudService {
   async findOne(id: string): Promise<Noeud> {
     try {
       return await this.NoeudModel.findById(id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async findNoeudByChamp(id: string): Promise<Noeud[]> {
+    try {
+      return await this.NoeudModel.find({champ: id});
     } catch (error) {
       throw new HttpException(error.message, 500);
     }

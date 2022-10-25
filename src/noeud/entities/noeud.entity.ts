@@ -12,7 +12,7 @@ export class Noeud {
     @Prop({type: Types.ObjectId, ref: Champ.name, required: true, autopopulate: true})
     champ: string;
 
-    @Prop({ type: Types.ObjectId, ref: Culture.name, required: true, autopopulate: true })
+    @Prop({ type: Types.ObjectId, ref: Culture.name, autopopulate: true })
     culture: string;
 }
 

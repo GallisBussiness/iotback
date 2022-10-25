@@ -11,6 +11,7 @@ import { Dht11, Dht11Schema } from './entities/dht11.entity';
     return schema;
   }}])],
   controllers: [Dht11Controller],
-  providers: [Dht11Service]
+  providers: [Dht11Service],
+  exports: [Dht11Service]
 })
 export class Dht11Module {}

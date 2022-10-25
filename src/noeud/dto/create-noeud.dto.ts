@@ -1,4 +1,4 @@
-import { IsMongoId, IsString } from "class-validator";
+import { IsMongoId, IsOptional, IsString } from "class-validator";
 
 export class CreateNoeudDto {
     @IsString()
@@ -7,6 +7,7 @@ export class CreateNoeudDto {
     @IsMongoId()
     champ: string;
 
+    @IsOptional()
     @IsMongoId()
     culture: string;
 }

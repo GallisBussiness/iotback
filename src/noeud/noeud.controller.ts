@@ -22,6 +22,11 @@ export class NoeudController {
     return this.noeudService.findOne(id);
   }
 
+  @Get('getnoeudbychamp/:id')
+  findNoeudByChamp(@Param('id') id: string) {
+    return this.noeudService.findNoeudByChamp(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateNoeudDto: UpdateNoeudDto) {
     return this.noeudService.update(id, updateNoeudDto);

@@ -36,6 +36,14 @@ export class CapteurService {
     }
   }
 
+  async findCapteurByNoeud(id: string): Promise<Capteur[]> {
+    try {
+      return await this.capteurModel.find({noeud: id});
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
+
   async update(
     id: string,
     updateCapteurDto: UpdateCapteurDto,

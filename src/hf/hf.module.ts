@@ -11,6 +11,7 @@ import { Hf, HfSchema } from './entities/hf.entity';
     return schema;
   }}])],
   controllers: [HfController],
-  providers: [HfService]
+  providers: [HfService],
+  exports: [HfService]
 })
 export class HfModule {}

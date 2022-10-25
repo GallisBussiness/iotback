@@ -11,6 +11,7 @@ import { Hsol, HsolSchema } from './entities/hsol.entity';
     return schema;
   }}])],
   controllers: [HsolController],
-  providers: [HsolService]
+  providers: [HsolService],
+  exports: [HsolService]
 })
 export class HsolModule {}

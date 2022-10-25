@@ -4,6 +4,10 @@ import { CapteurController } from './capteur.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Capteur, CapteurSchema } from './entities/capteur.entity';
 import { CaslModule } from 'src/casl/casl.module';
+import { PhModule } from 'src/ph/ph.module';
+import { HfModule } from 'src/hf/hf.module';
+import { HsolModule } from 'src/hsol/hsol.module';
+import { Dht11Module } from 'src/dht11/dht11.module';
 
 @Module({
   imports: [
@@ -13,6 +17,10 @@ import { CaslModule } from 'src/casl/casl.module';
       return schema;
     } }]),
     CaslModule,
+    PhModule,
+    HfModule,
+    HsolModule,
+    Dht11Module
   ],
   controllers: [CapteurController],
   providers: [CapteurService],

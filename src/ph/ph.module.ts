@@ -11,6 +11,7 @@ import { Ph, PhSchema } from './entities/ph.entity';
     return schema;
   }}])],
   controllers: [PhController],
-  providers: [PhService]
+  providers: [PhService],
+  exports: [PhService]
 })
 export class PhModule {}
