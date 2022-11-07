@@ -17,6 +17,11 @@ export class Dht11Controller {
     return this.dht11Service.findAll();
   }
 
+  @Get('/bycapteur/:id')
+  findAllByCapteur(@Param('id') id: string) {
+    return this.dht11Service.findAllByCapteur(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.dht11Service.findOne(id);

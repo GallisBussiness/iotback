@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Mongoose, Types } from 'mongoose';
 import { CreateDht11Dto } from './dto/create-dht11.dto';
 import { UpdateDht11Dto } from './dto/update-dht11.dto';
 import { Dht11, Dht11Document } from './entities/dht11.entity';
@@ -22,6 +22,14 @@ export class Dht11Service {
   async findAll(): Promise<Dht11[]> {
     try {
       return await this.Dht11Model.find();
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async findAllByCapteur(id: string): Promise<Dht11[]> {
+    try {
+      return await this.Dht11Model.find({capteur: new Types.ObjectId(id)});
     } catch (error) {
       throw new HttpException(error.message, 500);
     }

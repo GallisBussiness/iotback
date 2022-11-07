@@ -16,9 +16,6 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { TypeModule } from './type/type.module';
 import { NoeudModule } from './noeud/noeud.module';
 import { Dht11Module } from './dht11/dht11.module';
-import { HfModule } from './hf/hf.module';
-import { PhModule } from './ph/ph.module';
-import { HsolModule } from './hsol/hsol.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
@@ -50,9 +47,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     TypeModule,
     NoeudModule,
     Dht11Module,
-    HfModule,
-    PhModule,
-    HsolModule,
     ScheduleModule.forRoot()
   ],
   controllers: [],

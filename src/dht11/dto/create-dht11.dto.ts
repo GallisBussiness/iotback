@@ -1,11 +1,18 @@
-import { IsMongoId, IsNumber } from "class-validator";
+import { IsMongoId, IsNumber, IsOptional } from "class-validator";
 
 export class CreateDht11Dto {
-    @IsNumber()
-    temperature: number;
 
+    @IsOptional()
     @IsNumber()
-    humidite: number;
+    temperature?: number;
+
+    @IsOptional()
+    @IsNumber()
+    humidite?: number;
+
+    @IsOptional()
+    @IsNumber()
+    valeur?: number;
 
     @IsMongoId()
     capteur: string;
