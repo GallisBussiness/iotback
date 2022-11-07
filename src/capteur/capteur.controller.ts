@@ -51,7 +51,7 @@ export class CapteurController {
   }
 
 
-  @Cron(CronExpression.EVERY_11_HOURS)
+  @Cron(CronExpression.EVERY_WEEK)
   async handleCron() {
   const capteurs = await this.findAll();
   capteurs.forEach(async (c) => {
