@@ -36,6 +36,14 @@ export class ChampsService {
     }
   }
 
+  async findByUser(id: string): Promise<Champ[]> {
+    try {
+      return await this.champModel.find({user: id});
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
+
   async update(id: string, updateChampDto: UpdateChampDto): Promise<Champ> {
     try {
       return this.champModel.findByIdAndUpdate(id, updateChampDto);

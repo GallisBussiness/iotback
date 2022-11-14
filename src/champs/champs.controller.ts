@@ -30,6 +30,11 @@ export class ChampsController {
     return this.champsService.findOne(id);
   }
 
+  @Get('/byuser/:id')
+  findByUser(@Param('id') id: string) {
+    return this.champsService.findByUser(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateChampDto: UpdateChampDto) {
     return this.champsService.update(id, updateChampDto);
