@@ -29,7 +29,7 @@ export class Dht11Service {
 
   async findAllByCapteur(id: string): Promise<Dht11[]> {
     try {
-      return await this.Dht11Model.find({capteur: new Types.ObjectId(id)});
+      return await this.Dht11Model.find({capteur: new Types.ObjectId(id)}).sort({createdAt: 'desc'}).limit(10);
     } catch (error) {
       throw new HttpException(error.message, 500);
     }
