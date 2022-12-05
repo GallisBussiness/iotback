@@ -1,0 +1,1 @@
+export const SERIAL_PORT = 'SERIAL_PORT';

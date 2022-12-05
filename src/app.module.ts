@@ -17,6 +17,7 @@ import { TypeModule } from './type/type.module';
 import { NoeudModule } from './noeud/noeud.module';
 import { Dht11Module } from './dht11/dht11.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SerialPortModule } from './serial-port/serial-port.module';
 
 @Module({
   imports: [
@@ -39,6 +40,9 @@ import { ScheduleModule } from '@nestjs/schedule';
       },
       inject: [ConfigService],
     }),
+    SerialPortModule.forRoot(
+      // { path: '/dev/tty-usbserial1',baudRate: 9600}
+      ),
     EventEmitterModule.forRoot(),
     CapteurModule,
     UserModule,
