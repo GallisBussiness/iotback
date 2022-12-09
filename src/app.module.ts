@@ -18,6 +18,7 @@ import { NoeudModule } from './noeud/noeud.module';
 import { Dht11Module } from './dht11/dht11.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SerialPortModule } from './serial-port/serial-port.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -53,7 +54,7 @@ import { SerialPortModule } from './serial-port/serial-port.module';
     Dht11Module,
     ScheduleModule.forRoot()
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule implements NestModule {
